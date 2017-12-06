@@ -14,14 +14,16 @@ import java.awt.*;
 import java.io.IOException;
 
 /**
- * MyFirstLeader - a sample team robot by Mathew Nelson.
+ * ETSA02_BasicLeaderBot - a sample team robot for ETSA02.
  * <p/>
- * Looks around for enemies, and orders teammates to fire
+ * Looks around for enemies, and orders teammates to fire.
+ * If an enemy is close, it sometimes changes its position.
  *
- * @author Mathew A. Nelson (original)
- * @author Flemming N. Larsen (contributor)
+ * @author Markus Borg
  */
-public class MyFirstLeader extends TeamRobot {
+public class ETSA02_BasicLeaderBot extends TeamRobot {
+	
+	private LinkedList<Point> enemyPositions;
 
 	/**
 	 * run:  Leader's default behavior
@@ -43,9 +45,13 @@ public class MyFirstLeader extends TeamRobot {
 		setScanColor(c.scanColor);
 		setBulletColor(c.bulletColor);
 		try {
-			// Send RobotColors object to our entire team
+			// Send RobotColors object to the entire team
 			broadcastMessage(c);
 		} catch (IOException ignored) {}
+		
+		// Initiate attributes
+		enemyPositions = new LinkedList<Position>();
+		
 		// Normal behavior
 		while (true) {
 			setTurnRadarRight(10000);
